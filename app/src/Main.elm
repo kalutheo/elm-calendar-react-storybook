@@ -5,6 +5,21 @@ import Html.Attributes exposing (..)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
 
+-- Model
+
+
+type alias Model = {
+  dayPerWeek : Int,
+  selectedMonth: Int,
+  currentDates : List Date
+}
+
+model : Model
+model = {
+  dayPerWeek  = 7
+  ,selectedMonth = 9
+  ,currentDates = monthDates 2016 (Date.Oct)
+ }
 
 monthDates : Int -> Month -> List Date
 monthDates y m =
@@ -13,108 +28,43 @@ monthDates y m =
   in
     Date.range Day 1 start <| Date.add Day 42 start
 
-renderDate  =
-  let
-    maybeDate = Date.fromIsoString "2016-10-03"
-  in
-    case maybeDate of
-      Just date -> Date.toFormattedString "dd-MM-y" <| Date.add Month -2 date
-      Nothing -> "Invalid date"
+-- Helpers
 
+
+chunk : Int -> List a -> List (List a)
+chunk n list =
+  if List.isEmpty list then
+    []
+  else
+    List.take n list :: chunk n (List.drop n list)
+
+
+-- View
 
 main : Html msg
 main =
-    let
-      dates = monthDates 2016 (Date.Oct)
-      _ = Debug.log "hey" (List.map day dates)
-    in
-      calendarView
+    calendarView model
 
 
-calendarView : Html msg
-calendarView = div [ id "calendar" ]
+calendarDay : Date -> Html msg
+calendarDay date =
+  td []
+      [ text <| toString (day date) ]
+
+calendarRow : (List Date) -> Html msg
+calendarRow dateRow =
+  tr []
+      (List.map calendarDay dateRow)
+
+calendarView : Model -> Html msg
+calendarView model =
+  let
+    weeks = model.currentDates |> chunk model.dayPerWeek
+    _ = Debug.log "weeks" weeks
+  in
+  div [ id "calendar" ]
     [ h1 []
         [ text "October" ]
     , table []
-        [ tr []
-            [ td [ class "lastmonth" ]
-                [ text "30" ]
-            , td []
-                [ text "1" ]
-            , td []
-                [ text "2" ]
-            , td []
-                [ text "3" ]
-            , td [ class "hastask" ]
-                [ text "4" ]
-            , td []
-                [ text "5" ]
-            , td []
-                [ text "6" ]
-            ]
-        , tr []
-            [ td []
-                [ text "7" ]
-            , td [ class "current" ]
-                [ text "8" ]
-            , td [ class "hastask" ]
-                [ text "9" ]
-            , td []
-                [ text "10" ]
-            , td []
-                [ text "11" ]
-            , td [ class "hastask" ]
-                [ text "12" ]
-            , td []
-                [ text "13" ]
-            ]
-        , tr []
-            [ td []
-                [ text "14" ]
-            , td [ class "hastask" ]
-                [ text "15" ]
-            , td []
-                [ text "16" ]
-            , td []
-                [ text "17" ]
-            , td []
-                [ text "18" ]
-            , td []
-                [ text "19" ]
-            , td []
-                [ text "20" ]
-            ]
-        , tr []
-            [ td [ class "hastask" ]
-                [ text "21" ]
-            , td []
-                [ text "22" ]
-            , td []
-                [ text "23" ]
-            , td []
-                [ text "24" ]
-            , td []
-                [ text "25" ]
-            , td [ class "hastask" ]
-                [ text "26" ]
-            , td []
-                [ text "27" ]
-            ]
-        , tr []
-            [ td []
-                [ text "28" ]
-            , td []
-                [ text "29" ]
-            , td [ class "hastask" ]
-                [ text "30" ]
-            , td []
-                [ text "31" ]
-            , td [ class "nextmonth" ]
-                [ text "1" ]
-            , td []
-                [ text "2" ]
-            , td []
-                [ text "3" ]
-            ]
-        ]
+        (List.map calendarRow weeks)
     ]
