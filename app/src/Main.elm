@@ -23,6 +23,13 @@ model =
     }
 
 
+type DayState
+    = Normal
+    | Dimmed
+    | Disabled
+    | Selected
+
+
 
 -- Date utils
 
@@ -95,8 +102,18 @@ main =
 
 calendarDay : Date -> Html msg
 calendarDay date =
-    td []
-        [ text <| toString (day date) ]
+    let
+        state =
+            if (Date.monthNumber date) == 10 then
+                Normal
+            else
+                Dimmed
+
+        _ =
+            Debug.log "state" state
+    in
+        td []
+            [ text <| toString (day date) ]
 
 
 calendarRow : List Date -> Html msg
