@@ -12,6 +12,7 @@ import Array
 
 type alias Model =
     { selectedMonthIndex : Int
+    , selectedDay : Int
     , currentDates : List Date
     }
 
@@ -19,6 +20,7 @@ type alias Model =
 model : Model
 model =
     { selectedMonthIndex = 9
+    , selectedDay = 18
     , currentDates = monthDates 2016 (Date.Oct)
     }
 
@@ -32,6 +34,22 @@ type DayState
 
 
 -- Date utils
+
+
+classNameFromState : DayState -> String
+classNameFromState state =
+    case state of
+        Normal ->
+            ""
+
+        Dimmed ->
+            "lastmonth"
+
+        Disabled ->
+            ""
+
+        Selected ->
+            "current"
 
 
 monthDates : Int -> Month -> List Date
@@ -100,26 +118,25 @@ main =
     calendarView model
 
 
-calendarDay : Date -> Html msg
-calendarDay date =
+calendarDay : Date -> Model -> Html msg
+calendarDay date model =
     let
         state =
-            if (Date.monthNumber date) == 10 then
+            if model.selectedDay == day date then
+                Selected
+            else if Date.monthNumber date == model.selectedMonthIndex + 1 then
                 Normal
             else
                 Dimmed
-
-        _ =
-            Debug.log "state" state
     in
-        td []
+        td [ class <| classNameFromState state ]
             [ text <| toString (day date) ]
 
 
-calendarRow : List Date -> Html msg
-calendarRow dateRow =
+calendarRow : List Date -> Model -> Html msg
+calendarRow dateRow model =
     tr []
-        (List.map calendarDay dateRow)
+        (List.map (\day -> calendarDay day model) dateRow)
 
 
 calendarView : Model -> Html msg
@@ -132,5 +149,5 @@ calendarView model =
             [ h1 []
                 [ text <| getMonthNameByIndex model.selectedMonthIndex ]
             , table []
-                (List.map calendarRow weeks)
+                (List.map (\row -> calendarRow row model) weeks)
             ]
