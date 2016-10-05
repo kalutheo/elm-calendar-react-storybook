@@ -9,3 +9,6 @@ update msg model =
     case msg of
         SelectDay date ->
             { model | selectedDay = Just date }
+
+        HoverDay date ->
+            { model | hoveredDay = Just date }

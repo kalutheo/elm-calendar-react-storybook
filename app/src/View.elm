@@ -2,7 +2,7 @@ module View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onMouseOver)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
 import Model exposing (..)
@@ -52,7 +52,11 @@ calendarDay date model =
             else
                 Dimmed
     in
-        td [ class <| classNameFromState state, onClick <| SelectDay date ]
+        td
+            [ class <| classNameFromState state
+            , onClick <| SelectDay date
+            , onMouseOver <| HoverDay date
+            ]
             [ text <| toString (day date) ]
 
 
