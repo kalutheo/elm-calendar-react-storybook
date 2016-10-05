@@ -26,13 +26,23 @@ classNameFromState state =
             "current"
 
 
+isSelected : Int -> Date -> Bool
+isSelected selectedDay date =
+    selectedDay == day date
+
+
+isCurrentMonth : Date -> Int -> Bool
+isCurrentMonth date selectedMonthIndex =
+    Date.monthNumber date == selectedMonthIndex + 1
+
+
 calendarDay : Date -> Model -> Html Msg
 calendarDay date model =
     let
         state =
-            if model.selectedDay == day date then
+            if isSelected model.selectedDay date then
                 Selected
-            else if Date.monthNumber date == model.selectedMonthIndex + 1 then
+            else if isCurrentMonth date model.selectedMonthIndex then
                 Normal
             else
                 Dimmed
