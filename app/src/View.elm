@@ -26,9 +26,14 @@ classNameFromState state =
             "current"
 
 
-isSelected : Int -> Date -> Bool
+isSelected : Maybe Date -> Date -> Bool
 isSelected selectedDay date =
-    selectedDay == day date
+    case selectedDay of
+        Nothing ->
+            False
+
+        Just selectedDate ->
+            Date.equal selectedDate date
 
 
 isCurrentMonth : Date -> Int -> Bool

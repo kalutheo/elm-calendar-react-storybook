@@ -6,7 +6,7 @@ import Utils exposing (monthDates)
 
 type alias Model =
     { selectedMonthIndex : Int
-    , selectedDay : Int
+    , selectedDay : Maybe Date
     , currentDates : List Date
     }
 
@@ -21,6 +21,6 @@ type DayState
 model : Model
 model =
     { selectedMonthIndex = 9
-    , selectedDay = 18
+    , selectedDay = Nothing
     , currentDates = monthDates 2016 (Date.Oct)
     }
