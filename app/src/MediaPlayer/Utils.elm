@@ -1,4 +1,4 @@
-module Utils exposing (..)
+module MediaPlayer.Utils exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

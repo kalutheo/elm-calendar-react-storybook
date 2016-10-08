@@ -1,7 +1,7 @@
-module Model exposing (..)
+module MediaPlayer.Model exposing (..)
 
 import Date exposing (Date)
-import Utils exposing (monthDates)
+import MediaPlayer.Utils exposing (monthDates)
 
 
 type alias Model =

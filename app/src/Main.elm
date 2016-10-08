@@ -1,8 +1,8 @@
 module Main exposing (..)
 
-import Model exposing (..)
-import View exposing (..)
-import Update exposing (..)
+import MediaPlayer.Model exposing (..)
+import MediaPlayer.View exposing (..)
+import MediaPlayer.Update exposing (..)
 import Html.App as App
 
 

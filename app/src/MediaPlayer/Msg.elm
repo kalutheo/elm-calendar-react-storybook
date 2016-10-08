@@ -1,4 +1,4 @@
-module Msg exposing (..)
+module MediaPlayer.Msg exposing (..)
 
 import Date exposing (Date)
 

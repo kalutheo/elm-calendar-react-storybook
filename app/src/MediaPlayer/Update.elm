@@ -1,7 +1,7 @@
-module Update exposing (..)
+module MediaPlayer.Update exposing (..)
 
-import Msg exposing (..)
-import Model exposing (..)
+import MediaPlayer.Msg exposing (..)
+import MediaPlayer.Model exposing (..)
 
 
 update : Msg -> Model -> Model

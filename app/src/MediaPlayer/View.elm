@@ -1,13 +1,13 @@
-module View exposing (..)
+module MediaPlayer.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onMouseOver)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
-import Model exposing (..)
-import Utils exposing (..)
-import Msg exposing (..)
+import MediaPlayer.Model exposing (..)
+import MediaPlayer.Utils exposing (..)
+import MediaPlayer.Msg exposing (..)
 
 
 classNameFromState : DayState -> String
@@ -66,6 +66,12 @@ calendarRow dateRow model =
         (List.map (\day -> calendarDay day model) dateRow)
 
 
+calenderHeader : String -> Html Msg
+calenderHeader title =
+    h1 []
+        [ text title ]
+
+
 calendarView : Model -> Html Msg
 calendarView model =
     let
@@ -73,8 +79,7 @@ calendarView model =
             model.currentDates |> chunk dayPerWeek
     in
         div [ id "calendar" ]
-            [ h1 []
-                [ text <| getMonthNameByIndex model.selectedMonthIndex ]
+            [ calenderHeader (getMonthNameByIndex model.selectedMonthIndex)
             , table []
                 (List.map (\row -> calendarRow row model) weeks)
             ]
