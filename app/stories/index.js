@@ -3,8 +3,6 @@ import { storiesOf, action } from '@kadira/storybook';
 import '../src/main.css';
 import {Storybook} from '../build/storybook.calendar-header.js';
 
-console.log('Storybook?', Storybook);
-
 const Elm = React.createClass({
   componentDidMount() {
     console.log('componentDidMount');
@@ -38,11 +36,3 @@ storiesOf('Calendar Header', module)
       <Elm src={Storybook.CalenderHeader} flags={'january'} ports={()=>{}}/>
     </div>
   ))
-
-storiesOf('Button', module)
-  .add('with text', () => (
-    <button onClick={action('clicked')}>Hello Button</button>
-  ))
-  .add('with some emoji', () => (
-    <button onClick={action('clicked')}>😀 😎 👍 💯</button>
-  ));
