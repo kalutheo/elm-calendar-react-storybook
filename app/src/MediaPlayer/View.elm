@@ -8,6 +8,7 @@ import Date.Extra as Date exposing (Interval(..))
 import MediaPlayer.Model exposing (..)
 import MediaPlayer.Utils exposing (..)
 import MediaPlayer.Msg exposing (..)
+import Time
 
 
 classNameFromState : DayState -> String
@@ -46,7 +47,9 @@ isBetween start end needle =
             (\start end ->
                 let
                     isBeforeStart =
-                        ((needle |> Date.day) > (start |> Date.day))
+                        ((needle |> Date.toTime |> Time.inMilliseconds)
+                            > (start |> Date.toTime |> Time.inMilliseconds)
+                        )
                 in
                     isBeforeStart && Date.isBetween start end needle
             )
