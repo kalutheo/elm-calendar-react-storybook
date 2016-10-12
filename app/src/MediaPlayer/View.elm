@@ -44,7 +44,11 @@ isBetween start end needle =
     case
         Maybe.map2
             (\start end ->
-                Date.isBetween start end needle
+                let
+                    isBeforeStart =
+                        ((needle |> Date.day) > (start |> Date.day))
+                in
+                    isBeforeStart && Date.isBetween start end needle
             )
             start
             end
