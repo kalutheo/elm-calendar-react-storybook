@@ -17,6 +17,7 @@ type DayState
     | Dimmed
     | Disabled
     | Selected
+    | Hovered
 
 
 model : Model

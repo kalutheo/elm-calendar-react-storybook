@@ -2,7 +2,7 @@ module MediaPlayer.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onMouseOver)
+import Html.Events exposing (onClick, onMouseOver, onMouseOut)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
 import MediaPlayer.Model exposing (..)
@@ -25,6 +25,9 @@ classNameFromState state =
         Selected ->
             "current"
 
+        Hovered ->
+            "hovered"
+
 
 isSelected : Maybe Date -> Date -> Bool
 isSelected selectedDay date =
@@ -34,6 +37,27 @@ isSelected selectedDay date =
 
         Just selectedDate ->
             Date.equal selectedDate date
+
+
+isBetween : Maybe Date -> Maybe Date -> Date -> Bool
+isBetween start end needle =
+    case
+        Maybe.map2
+            (\start end ->
+                Date.isBetween start end needle
+            )
+            start
+            end
+    of
+        Nothing ->
+            False
+
+        Just val ->
+            val
+
+
+
+-- Date.isBetween (Maybe.withDefault needle start) (Maybe.withDefault needle start) needle
 
 
 isCurrentMonth : Date -> Int -> Bool
@@ -47,6 +71,8 @@ calendarDay date model =
         state =
             if isSelected model.selectedDay date then
                 Selected
+            else if isBetween model.selectedDay model.hoveredDay date then
+                Hovered
             else if isCurrentMonth date model.selectedMonthIndex then
                 Normal
             else
@@ -56,6 +82,7 @@ calendarDay date model =
             [ class <| classNameFromState state
             , onClick <| SelectDay date
             , onMouseOver <| HoverDay date
+            , onMouseOut <| BlurDay date
             ]
             [ text <| toString (day date) ]
 

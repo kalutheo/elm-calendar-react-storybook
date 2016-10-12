@@ -12,3 +12,6 @@ update msg model =
 
         HoverDay date ->
             { model | hoveredDay = Just date }
+
+        BlurDay date ->
+            { model | hoveredDay = Nothing }
