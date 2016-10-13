@@ -117,7 +117,7 @@ calenderHeader title =
         [ text title ]
 
 
-selectedDayLabelView : String -> Maybe String -> Html a
+selectedDayLabelView : String -> Maybe String -> Html Msg
 selectedDayLabelView title day =
     div [ class "select-date-label" ]
         [ span [ class "label" ]
