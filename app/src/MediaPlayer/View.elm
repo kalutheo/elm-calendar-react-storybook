@@ -31,8 +31,8 @@ classNameFromState state =
 
 
 isSelected : Maybe Date -> Date -> Bool
-isSelected selectedDay date =
-    case selectedDay of
+isSelected selectedStartDay date =
+    case selectedStartDay of
         Nothing ->
             False
 
@@ -63,10 +63,6 @@ isBetween start end needle =
             val
 
 
-
--- Date.isBetween (Maybe.withDefault needle start) (Maybe.withDefault needle start) needle
-
-
 isCurrentMonth : Date -> Int -> Bool
 isCurrentMonth date selectedMonthIndex =
     Date.monthNumber date == selectedMonthIndex + 1
@@ -76,14 +72,29 @@ calendarDay : Date -> Model -> Html Msg
 calendarDay date model =
     let
         state =
-            if isSelected model.selectedDay date then
-                Selected
-            else if isBetween model.selectedDay model.hoveredDay date then
-                Hovered
-            else if isCurrentMonth date model.selectedMonthIndex then
-                Normal
-            else
-                Dimmed
+            case Maybe.oneOf [ model.selectedEndDay ] of
+                Nothing ->
+                    if isSelected model.selectedStartDay date then
+                        Selected
+                    else if isSelected model.selectedEndDay date then
+                        Selected
+                    else if isBetween model.selectedStartDay model.hoveredDay date then
+                        Hovered
+                    else if isCurrentMonth date model.selectedMonthIndex then
+                        Normal
+                    else
+                        Dimmed
+
+                Just endDate ->
+                    if
+                        isSelected model.selectedStartDay date
+                            || isBetween model.selectedStartDay model.selectedEndDay date
+                    then
+                        Selected
+                    else if isCurrentMonth date model.selectedMonthIndex then
+                        Normal
+                    else
+                        Dimmed
     in
         td
             [ class <| classNameFromState state
@@ -111,6 +122,12 @@ calendarView model =
     let
         weeks =
             model.currentDates |> chunk dayPerWeek
+
+        _ =
+            Debug.log "selectedStartDay" model.selectedStartDay
+
+        _ =
+            Debug.log "selectedEndDay" model.selectedEndDay
     in
         div [ id "calendar" ]
             [ calenderHeader (getMonthNameByIndex model.selectedMonthIndex)

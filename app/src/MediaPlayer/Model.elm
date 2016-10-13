@@ -6,7 +6,8 @@ import MediaPlayer.Utils exposing (monthDates)
 
 type alias Model =
     { selectedMonthIndex : Int
-    , selectedDay : Maybe Date
+    , selectedStartDay : Maybe Date
+    , selectedEndDay : Maybe Date
     , hoveredDay : Maybe Date
     , currentDates : List Date
     }
@@ -23,7 +24,8 @@ type DayState
 model : Model
 model =
     { selectedMonthIndex = 9
-    , selectedDay = Nothing
+    , selectedStartDay = Nothing
+    , selectedEndDay = Nothing
     , hoveredDay = Nothing
     , currentDates = monthDates 2016 (Date.Oct)
     }

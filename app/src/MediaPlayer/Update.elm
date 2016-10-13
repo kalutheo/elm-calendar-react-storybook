@@ -8,7 +8,17 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         SelectDay date ->
-            { model | selectedDay = Just date }
+            case Maybe.oneOf [ model.selectedEndDay ] of
+                Nothing ->
+                    case model.selectedStartDay of
+                        Nothing ->
+                            { model | selectedStartDay = Just date }
+
+                        Just selectedDate ->
+                            { model | selectedEndDay = Just date }
+
+                Just otherdate ->
+                    { model | selectedStartDay = Just date, selectedEndDay = Nothing }
 
         HoverDay date ->
             { model | hoveredDay = Just date }

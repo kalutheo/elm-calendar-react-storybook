@@ -67,7 +67,7 @@ body{
 }
 
 #calendar .hovered{
-  background: yellow!important;
+  background: #FFCBA4 !important;
 }
 
 #calendar .hastask{
