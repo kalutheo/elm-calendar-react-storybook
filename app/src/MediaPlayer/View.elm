@@ -117,20 +117,40 @@ calenderHeader title =
         [ text title ]
 
 
+selectedDayLabelView : String -> Maybe String -> Html a
+selectedDayLabelView title day =
+    div [ class "select-date-label" ]
+        [ span [ class "label" ]
+            [ text title ]
+        , span
+            [ class "date" ]
+            [ text (Maybe.withDefault "" day) ]
+        ]
+
+
 calendarView : Model -> Html Msg
 calendarView model =
     let
         weeks =
             model.currentDates |> chunk dayPerWeek
 
-        _ =
-            Debug.log "selectedStartDay" model.selectedStartDay
+        startDay =
+            Maybe.map (Date.toFormattedString "MMMM d, y") model.selectedStartDay
 
-        _ =
-            Debug.log "selectedEndDay" model.selectedEndDay
+        endDay =
+            Maybe.map (Date.toFormattedString "MMMM d, y") model.selectedEndDay
     in
-        div [ id "calendar" ]
-            [ calenderHeader (getMonthNameByIndex model.selectedMonthIndex)
-            , table []
-                (List.map (\row -> calendarRow row model) weeks)
+        div []
+            [ div [ id "calendar" ]
+                [ calenderHeader (getMonthNameByIndex model.selectedMonthIndex)
+                , table []
+                    (List.map (\row -> calendarRow row model) weeks)
+                ]
+            , div
+                [ id "footer" ]
+                [ footer []
+                    [ selectedDayLabelView "Start Date : " startDay
+                    , selectedDayLabelView "End Date : " endDay
+                    ]
+                ]
             ]

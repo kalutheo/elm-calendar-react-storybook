@@ -76,3 +76,18 @@ body{
 
 #calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
 #calendar tr:last-of-type td:last-of-type{border-radius:0 0 5px 0;}
+
+#footer {
+  background-color: #ddd;
+  width: 100%;
+}
+
+#footer .select-date-label{
+  font-family:'Open Sans',sans-serif;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+#footer .date {
+  color: #ee3333
+}
