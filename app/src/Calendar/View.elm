@@ -1,13 +1,13 @@
-module MediaPlayer.View exposing (..)
+module Calendar.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onMouseOver, onMouseOut)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
-import MediaPlayer.Model exposing (..)
-import MediaPlayer.Utils exposing (..)
-import MediaPlayer.Msg exposing (..)
+import Calendar.Model exposing (..)
+import Calendar.Utils exposing (..)
+import Calendar.Msg exposing (..)
 import Time
 
 

@@ -1,6 +1,6 @@
 port module Storybook.CalenderHeader exposing (..)
 
-import MediaPlayer.View exposing (calenderHeader)
+import Calendar.View exposing (calenderHeader)
 import Storybook.Utils exposing (storybookApp)
 
 

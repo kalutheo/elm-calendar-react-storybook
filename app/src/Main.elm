@@ -1,8 +1,8 @@
 module Main exposing (..)
 
-import MediaPlayer.Model exposing (..)
-import MediaPlayer.View exposing (..)
-import MediaPlayer.Update exposing (..)
+import Calendar.Model exposing (..)
+import Calendar.View exposing (..)
+import Calendar.Update exposing (..)
 import Html.App as App
 
 

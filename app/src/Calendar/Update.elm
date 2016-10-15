@@ -1,7 +1,7 @@
-module MediaPlayer.Update exposing (..)
+module Calendar.Update exposing (..)
 
-import MediaPlayer.Msg exposing (..)
-import MediaPlayer.Model exposing (..)
+import Calendar.Msg exposing (..)
+import Calendar.Model exposing (..)
 
 
 update : Msg -> Model -> Model
