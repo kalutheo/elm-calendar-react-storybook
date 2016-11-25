@@ -10783,9 +10783,23 @@ var _user$project$Calendar_View$isSelected = F2(
 			return A2(_justinmimbs$elm_date_extra$Date_Extra$equal, _p1._0, date);
 		}
 	});
+var _user$project$Calendar_View$getDateState = F2(
+	function (date, model) {
+		var _p2 = _user$project$Calendar_Utils$oneOf(
+			{
+				ctor: '::',
+				_0: model.selectedEndDay,
+				_1: {ctor: '[]'}
+			});
+		if (_p2.ctor === 'Nothing') {
+			return A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isSelected, model.selectedEndDay, date) ? _user$project$Calendar_Model$Selected : (A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.hoveredDay, date) ? _user$project$Calendar_Model$Hovered : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed)));
+		} else {
+			return (A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) || A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.selectedEndDay, date)) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed);
+		}
+	});
 var _user$project$Calendar_View$classNameFromState = function (state) {
-	var _p2 = state;
-	switch (_p2.ctor) {
+	var _p3 = state;
+	switch (_p3.ctor) {
 		case 'Normal':
 			return '';
 		case 'Dimmed':
@@ -10799,26 +10813,13 @@ var _user$project$Calendar_View$classNameFromState = function (state) {
 	}
 };
 var _user$project$Calendar_View$calendarDay = F2(
-	function (date, model) {
-		var state = function () {
-			var _p3 = _user$project$Calendar_Utils$oneOf(
-				{
-					ctor: '::',
-					_0: model.selectedEndDay,
-					_1: {ctor: '[]'}
-				});
-			if (_p3.ctor === 'Nothing') {
-				return A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isSelected, model.selectedEndDay, date) ? _user$project$Calendar_Model$Selected : (A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.hoveredDay, date) ? _user$project$Calendar_Model$Hovered : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed)));
-			} else {
-				return (A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) || A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.selectedEndDay, date)) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed);
-			}
-		}();
+	function (date, dayState) {
 		return A2(
 			_elm_lang$html$Html$td,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class(
-					_user$project$Calendar_View$classNameFromState(state)),
+					_user$project$Calendar_View$classNameFromState(dayState)),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
@@ -10852,7 +10853,10 @@ var _user$project$Calendar_View$calendarRow = F2(
 			A2(
 				_elm_lang$core$List$map,
 				function (day) {
-					return A2(_user$project$Calendar_View$calendarDay, day, model);
+					return A2(
+						_user$project$Calendar_View$calendarDay,
+						day,
+						A2(_user$project$Calendar_View$getDateState, day, model));
 				},
 				dateRow));
 	});
@@ -10943,7 +10947,35 @@ var _user$project$Storybook_Utils$storybookApp = function (_p0) {
 		});
 };
 
-var _user$project$Storybook_CalenderHeader$main = _user$project$Storybook_Utils$storybookApp(
+var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$storybookApp(
+	{
+		view: function (model) {
+			var date = A2(
+				_elm_lang$core$Result$withDefault,
+				_elm_lang$core$Date$fromTime(0),
+				_elm_lang$core$Date$fromString('2011/1/1'));
+			return A2(
+				_elm_lang$html$Html$table,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$tr,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(_user$project$Calendar_View$calendarDay, date, _user$project$Calendar_Model$Dimmed),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		},
+		init: function (flags) {
+			return {ctor: '_Tuple2', _0: flags, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	})(_elm_lang$core$Json_Decode$string);
+
+var _user$project$Storybook_CalendarHeader$main = _user$project$Storybook_Utils$storybookApp(
 	{
 		view: _user$project$Calendar_View$calenderHeader,
 		init: function (flags) {
@@ -10953,9 +10985,14 @@ var _user$project$Storybook_CalenderHeader$main = _user$project$Storybook_Utils$
 
 var Elm = {};
 Elm['Storybook'] = Elm['Storybook'] || {};
-Elm['Storybook']['CalenderHeader'] = Elm['Storybook']['CalenderHeader'] || {};
-if (typeof _user$project$Storybook_CalenderHeader$main !== 'undefined') {
-    _user$project$Storybook_CalenderHeader$main(Elm['Storybook']['CalenderHeader'], 'Storybook.CalenderHeader', undefined);
+Elm['Storybook']['CalendarDay'] = Elm['Storybook']['CalendarDay'] || {};
+if (typeof _user$project$Storybook_CalendarDay$main !== 'undefined') {
+    _user$project$Storybook_CalendarDay$main(Elm['Storybook']['CalendarDay'], 'Storybook.CalendarDay', undefined);
+}
+Elm['Storybook'] = Elm['Storybook'] || {};
+Elm['Storybook']['CalendarHeader'] = Elm['Storybook']['CalendarHeader'] || {};
+if (typeof _user$project$Storybook_CalendarHeader$main !== 'undefined') {
+    _user$project$Storybook_CalendarHeader$main(Elm['Storybook']['CalendarHeader'], 'Storybook.CalendarHeader', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

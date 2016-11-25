@@ -68,47 +68,53 @@ isCurrentMonth date selectedMonthIndex =
     Date.monthNumber date == selectedMonthIndex + 1
 
 
-calendarDay : Date -> Model -> Html Msg
-calendarDay date model =
-    let
-        state =
-            case oneOf [ model.selectedEndDay ] of
-                Nothing ->
-                    if isSelected model.selectedStartDay date then
-                        Selected
-                    else if isSelected model.selectedEndDay date then
-                        Selected
-                    else if isBetween model.selectedStartDay model.hoveredDay date then
-                        Hovered
-                    else if isCurrentMonth date model.selectedMonthIndex then
-                        Normal
-                    else
-                        Dimmed
+getDateState : Date -> Model -> DayState
+getDateState date model =
+    case oneOf [ model.selectedEndDay ] of
+        Nothing ->
+            if isSelected model.selectedStartDay date then
+                Selected
+            else if isSelected model.selectedEndDay date then
+                Selected
+            else if isBetween model.selectedStartDay model.hoveredDay date then
+                Hovered
+            else if isCurrentMonth date model.selectedMonthIndex then
+                Normal
+            else
+                Dimmed
 
-                Just endDate ->
-                    if
-                        isSelected model.selectedStartDay date
-                            || isBetween model.selectedStartDay model.selectedEndDay date
-                    then
-                        Selected
-                    else if isCurrentMonth date model.selectedMonthIndex then
-                        Normal
-                    else
-                        Dimmed
-    in
-        td
-            [ class <| classNameFromState state
-            , onClick <| SelectDay date
-            , onMouseOver <| HoverDay date
-            , onMouseOut <| BlurDay date
-            ]
-            [ text <| toString (day date) ]
+        Just endDate ->
+            if
+                isSelected model.selectedStartDay date
+                    || isBetween model.selectedStartDay model.selectedEndDay date
+            then
+                Selected
+            else if isCurrentMonth date model.selectedMonthIndex then
+                Normal
+            else
+                Dimmed
+
+
+calendarDay : Date -> DayState -> Html Msg
+calendarDay date dayState =
+    td
+        [ class <| classNameFromState dayState
+        , onClick <| SelectDay date
+        , onMouseOver <| HoverDay date
+        , onMouseOut <| BlurDay date
+        ]
+        [ text <| toString (day date) ]
 
 
 calendarRow : List Date -> Model -> Html Msg
 calendarRow dateRow model =
     tr []
-        (List.map (\day -> calendarDay day model) dateRow)
+        (List.map
+            (\day ->
+                calendarDay day (getDateState day model)
+            )
+            dateRow
+        )
 
 
 calenderHeader : String -> Html Msg

@@ -1,38 +1,53 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import '../src/main.css';
-import {Storybook} from '../build/storybook.calendar-header.js';
+import {Storybook} from '../build/calendar.storybook.js';
 
 const Elm = React.createClass({
-  componentDidMount() {
-    console.log('componentDidMount');
-    const node = this.refs.component;
-		var app = this.props.src.embed(node, this.props.flags);
-		if (typeof this.props.ports !== 'undefined') {
-			this.props.ports(app.ports);
-		}
+  handleRef(ref) {
+    this.ref = ref;
   },
-	shouldComponentUpdate: function(prevProps) {
-		return false;
-	},
+  componentDidMount() {
+    if (this.ref) {
+      this.props.src.embed(this.ref, this.props.flags);
+    }
+  },
 	render: function () {
-		return <div ref='component'></div>
+		return <div ref={this.handleRef}></div>
 	}
 });
 
 storiesOf('Calendar Header', module)
   .add('october', () => (
     <div id="calendar">
-      <Elm src={Storybook.CalenderHeader} flags={'October'} ports={()=>{}}/>
+      <Elm src={Storybook.CalendarHeader} flags={'October'} />
     </div>
   ))
   .add('december', () => (
     <div id="calendar">
-      <Elm src={Storybook.CalenderHeader} flags={'December'} ports={()=>{}}/>
+      <Elm src={Storybook.CalendarHeader} flags={'December'} />
     </div>
   ))
   .add('january', () => (
     <div id="calendar">
-      <Elm src={Storybook.CalenderHeader} flags={'january'} ports={()=>{}}/>
+      <Elm src={Storybook.CalendarHeader} flags={'january'} />
     </div>
   ))
+
+
+  storiesOf('Calendar Day', module)
+    .add('october', () => (
+      <div id="calendar">
+        <Elm src={Storybook.CalendarDay} flags={'October'} />
+      </div>
+    ))
+    .add('december', () => (
+      <div id="calendar">
+        <Elm src={Storybook.CalendarDay} flags={'December'} />
+      </div>
+    ))
+    .add('january', () => (
+      <div id="calendar">
+        <Elm src={Storybook.CalendarDay} flags={'january'} />
+      </div>
+    ))
