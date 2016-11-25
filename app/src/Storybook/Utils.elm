@@ -1,6 +1,6 @@
 module Storybook.Utils exposing (..)
 
-import Html.App as Html
+import Html
 
 
 -- APP

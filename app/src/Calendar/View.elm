@@ -72,7 +72,7 @@ calendarDay : Date -> Model -> Html Msg
 calendarDay date model =
     let
         state =
-            case Maybe.oneOf [ model.selectedEndDay ] of
+            case oneOf [ model.selectedEndDay ] of
                 Nothing ->
                     if isSelected model.selectedStartDay date then
                         Selected

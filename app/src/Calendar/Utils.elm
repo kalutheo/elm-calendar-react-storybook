@@ -1,11 +1,23 @@
 module Calendar.Utils exposing (..)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
 import Date exposing (Date, Month(..), year, month, day)
 import Date.Extra as Date exposing (Interval(..))
 import Array
+
+
+oneOf : List (Maybe a) -> Maybe a
+oneOf maybes =
+    case maybes of
+        [] ->
+            Nothing
+
+        maybe :: rest ->
+            case maybe of
+                Nothing ->
+                    oneOf rest
+
+                Just _ ->
+                    maybe
 
 
 chunk : Int -> List a -> List (List a)
@@ -55,7 +67,7 @@ getMonthNameByIndex selectedMonthIndex =
     in
         case maybeMonth of
             Just date ->
-                date |> snd
+                date |> Tuple.second
 
             Nothing ->
                 ""

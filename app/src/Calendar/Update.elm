@@ -2,13 +2,14 @@ module Calendar.Update exposing (..)
 
 import Calendar.Msg exposing (..)
 import Calendar.Model exposing (..)
+import Calendar.Utils exposing (oneOf)
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         SelectDay date ->
-            case Maybe.oneOf [ model.selectedEndDay ] of
+            case oneOf [ model.selectedEndDay ] of
                 Nothing ->
                     case model.selectedStartDay of
                         Nothing ->
