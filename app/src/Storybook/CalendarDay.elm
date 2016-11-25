@@ -24,5 +24,4 @@ main =
                             [ calendarDay date (stateFromString model)
                             ]
                         ]
-        , init = \flags -> ( flags, Cmd.none )
         }

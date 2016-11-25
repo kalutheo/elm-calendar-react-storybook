@@ -10955,7 +10955,9 @@ var _user$project$Storybook_Utils$storybookApp = function (_p0) {
 	var _p1 = _p0;
 	return _elm_lang$html$Html$programWithFlags(
 		{
-			init: _p1.init,
+			init: function (flags) {
+				return {ctor: '_Tuple2', _0: flags, _1: _elm_lang$core$Platform_Cmd$none};
+			},
 			view: _p1.view,
 			subscriptions: function (_p2) {
 				return _elm_lang$core$Platform_Sub$none;
@@ -10971,7 +10973,6 @@ var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$sto
 				_elm_lang$core$Result$withDefault,
 				_elm_lang$core$Date$fromTime(0),
 				_elm_lang$core$Date$fromString('2011/3/3'));
-			var _p0 = A2(_elm_lang$core$Debug$log, 'model :-)', model);
 			return A2(
 				_elm_lang$html$Html$table,
 				{ctor: '[]'},
@@ -10990,19 +10991,11 @@ var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$sto
 						}),
 					_1: {ctor: '[]'}
 				});
-		},
-		init: function (flags) {
-			return {ctor: '_Tuple2', _0: flags, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	})(_elm_lang$core$Json_Decode$string);
 
 var _user$project$Storybook_CalendarHeader$main = _user$project$Storybook_Utils$storybookApp(
-	{
-		view: _user$project$Calendar_View$calenderHeader,
-		init: function (flags) {
-			return {ctor: '_Tuple2', _0: flags, _1: _elm_lang$core$Platform_Cmd$none};
-		}
-	})(_elm_lang$core$Json_Decode$string);
+	{view: _user$project$Calendar_View$calenderHeader})(_elm_lang$core$Json_Decode$string);
 
 var Elm = {};
 Elm['Storybook'] = Elm['Storybook'] || {};

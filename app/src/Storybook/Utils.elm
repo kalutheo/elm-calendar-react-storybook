@@ -11,9 +11,9 @@ update msg model =
     ( model, Cmd.none )
 
 
-storybookApp { view, init } =
+storybookApp { view } =
     Html.programWithFlags
-        { init = init
+        { init = \flags -> ( flags, Cmd.none )
         , view = view
         , subscriptions = \_ -> Sub.none
         , update = update

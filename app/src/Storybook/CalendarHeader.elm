@@ -12,5 +12,4 @@ main : Program String String Msg
 main =
     storybookApp
         { view = calenderHeader
-        , init = \flags -> ( flags, Cmd.none )
         }
