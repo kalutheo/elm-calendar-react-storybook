@@ -11,6 +11,7 @@ update msg model =
     ( model, Cmd.none )
 
 
+storybookApp : { b | view : a -> Html.Html msg } -> Program a a msg
 storybookApp { view } =
     Html.programWithFlags
         { init = \flags -> ( flags, Cmd.none )
