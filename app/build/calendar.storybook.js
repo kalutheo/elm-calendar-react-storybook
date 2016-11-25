@@ -10667,6 +10667,42 @@ var _user$project$Calendar_Utils$oneOf = function (maybes) {
 		}
 	}
 };
+var _user$project$Calendar_Utils$isCurrentMonth = F2(
+	function (date, selectedMonthIndex) {
+		return _elm_lang$core$Native_Utils.eq(
+			_justinmimbs$elm_date_extra$Date_Extra$monthNumber(date),
+			selectedMonthIndex + 1);
+	});
+var _user$project$Calendar_Utils$isBetween = F3(
+	function (start, end, needle) {
+		var _p4 = A3(
+			_elm_lang$core$Maybe$map2,
+			F2(
+				function (start, end) {
+					var isBeforeStart = _elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$Time$inMilliseconds(
+							_elm_lang$core$Date$toTime(needle)),
+						_elm_lang$core$Time$inMilliseconds(
+							_elm_lang$core$Date$toTime(start))) > 0;
+					return isBeforeStart && A3(_justinmimbs$elm_date_extra$Date_Extra$isBetween, start, end, needle);
+				}),
+			start,
+			end);
+		if (_p4.ctor === 'Nothing') {
+			return false;
+		} else {
+			return _p4._0;
+		}
+	});
+var _user$project$Calendar_Utils$isSelected = F2(
+	function (selectedStartDay, date) {
+		var _p5 = selectedStartDay;
+		if (_p5.ctor === 'Nothing') {
+			return false;
+		} else {
+			return A2(_justinmimbs$elm_date_extra$Date_Extra$equal, _p5._0, date);
+		}
+	});
 
 var _user$project$Calendar_Model$model = {
 	selectedMonthIndex: 9,
@@ -10747,59 +10783,23 @@ var _user$project$Calendar_View$calenderHeader = function (title) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Calendar_View$isCurrentMonth = F2(
-	function (date, selectedMonthIndex) {
-		return _elm_lang$core$Native_Utils.eq(
-			_justinmimbs$elm_date_extra$Date_Extra$monthNumber(date),
-			selectedMonthIndex + 1);
-	});
-var _user$project$Calendar_View$isBetween = F3(
-	function (start, end, needle) {
-		var _p0 = A3(
-			_elm_lang$core$Maybe$map2,
-			F2(
-				function (start, end) {
-					var isBeforeStart = _elm_lang$core$Native_Utils.cmp(
-						_elm_lang$core$Time$inMilliseconds(
-							_elm_lang$core$Date$toTime(needle)),
-						_elm_lang$core$Time$inMilliseconds(
-							_elm_lang$core$Date$toTime(start))) > 0;
-					return isBeforeStart && A3(_justinmimbs$elm_date_extra$Date_Extra$isBetween, start, end, needle);
-				}),
-			start,
-			end);
-		if (_p0.ctor === 'Nothing') {
-			return false;
-		} else {
-			return _p0._0;
-		}
-	});
-var _user$project$Calendar_View$isSelected = F2(
-	function (selectedStartDay, date) {
-		var _p1 = selectedStartDay;
-		if (_p1.ctor === 'Nothing') {
-			return false;
-		} else {
-			return A2(_justinmimbs$elm_date_extra$Date_Extra$equal, _p1._0, date);
-		}
-	});
 var _user$project$Calendar_View$getDateState = F2(
 	function (date, model) {
-		var _p2 = _user$project$Calendar_Utils$oneOf(
+		var _p0 = _user$project$Calendar_Utils$oneOf(
 			{
 				ctor: '::',
 				_0: model.selectedEndDay,
 				_1: {ctor: '[]'}
 			});
-		if (_p2.ctor === 'Nothing') {
-			return A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isSelected, model.selectedEndDay, date) ? _user$project$Calendar_Model$Selected : (A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.hoveredDay, date) ? _user$project$Calendar_Model$Hovered : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed)));
+		if (_p0.ctor === 'Nothing') {
+			return A2(_user$project$Calendar_Utils$isSelected, model.selectedStartDay, date) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_Utils$isSelected, model.selectedEndDay, date) ? _user$project$Calendar_Model$Selected : (A3(_user$project$Calendar_Utils$isBetween, model.selectedStartDay, model.hoveredDay, date) ? _user$project$Calendar_Model$Hovered : (A2(_user$project$Calendar_Utils$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed)));
 		} else {
-			return (A2(_user$project$Calendar_View$isSelected, model.selectedStartDay, date) || A3(_user$project$Calendar_View$isBetween, model.selectedStartDay, model.selectedEndDay, date)) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_View$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed);
+			return (A2(_user$project$Calendar_Utils$isSelected, model.selectedStartDay, date) || A3(_user$project$Calendar_Utils$isBetween, model.selectedStartDay, model.selectedEndDay, date)) ? _user$project$Calendar_Model$Selected : (A2(_user$project$Calendar_Utils$isCurrentMonth, date, model.selectedMonthIndex) ? _user$project$Calendar_Model$Normal : _user$project$Calendar_Model$Dimmed);
 		}
 	});
 var _user$project$Calendar_View$classNameFromState = function (state) {
-	var _p3 = state;
-	switch (_p3.ctor) {
+	var _p1 = state;
+	switch (_p1.ctor) {
 		case 'Normal':
 			return '';
 		case 'Dimmed':
@@ -10929,6 +10929,23 @@ var _user$project$Calendar_View$calendarView = function (model) {
 			}
 		});
 };
+var _user$project$Calendar_View$stateFromString = function (stateString) {
+	var _p2 = stateString;
+	switch (_p2) {
+		case 'Normal':
+			return _user$project$Calendar_Model$Normal;
+		case 'Dimmed':
+			return _user$project$Calendar_Model$Dimmed;
+		case 'Disabled':
+			return _user$project$Calendar_Model$Disabled;
+		case 'Selected':
+			return _user$project$Calendar_Model$Selected;
+		case 'Hovered':
+			return _user$project$Calendar_Model$Hovered;
+		default:
+			return _user$project$Calendar_Model$Normal;
+	}
+};
 
 var _user$project$Storybook_Utils$update = F2(
 	function (msg, model) {
@@ -10953,7 +10970,8 @@ var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$sto
 			var date = A2(
 				_elm_lang$core$Result$withDefault,
 				_elm_lang$core$Date$fromTime(0),
-				_elm_lang$core$Date$fromString('2011/1/1'));
+				_elm_lang$core$Date$fromString('2011/3/3'));
+			var _p0 = A2(_elm_lang$core$Debug$log, 'model :-)', model);
 			return A2(
 				_elm_lang$html$Html$table,
 				{ctor: '[]'},
@@ -10964,7 +10982,10 @@ var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$sto
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: A2(_user$project$Calendar_View$calendarDay, date, _user$project$Calendar_Model$Dimmed),
+							_0: A2(
+								_user$project$Calendar_View$calendarDay,
+								date,
+								_user$project$Calendar_View$stateFromString(model)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}

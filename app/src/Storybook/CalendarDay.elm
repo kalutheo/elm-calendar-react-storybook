@@ -1,6 +1,6 @@
 port module Storybook.CalendarDay exposing (..)
 
-import Calendar.View exposing (calendarDay, calenderHeader)
+import Calendar.View exposing (calendarDay, calenderHeader, stateFromString)
 import Storybook.Utils exposing (storybookApp)
 import Date
 import Calendar.Model exposing (..)
@@ -18,11 +18,11 @@ main =
             \model ->
                 let
                     date =
-                        Date.fromString "2011/1/1" |> Result.withDefault (Date.fromTime 0)
+                        Date.fromString "2011/3/3" |> Result.withDefault (Date.fromTime 0)
                 in
                     table []
                         [ tr []
-                            [ calendarDay date Dimmed
+                            [ calendarDay date (stateFromString model)
                             ]
                         ]
         , init = \flags -> ( flags, Cmd.none )

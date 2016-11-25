@@ -8,7 +8,28 @@ import Date.Extra as Date exposing (Interval(..))
 import Calendar.Model exposing (..)
 import Calendar.Utils exposing (..)
 import Calendar.Msg exposing (..)
-import Time
+
+
+stateFromString : String -> DayState
+stateFromString stateString =
+    case stateString of
+        "Normal" ->
+            Normal
+
+        "Dimmed" ->
+            Dimmed
+
+        "Disabled" ->
+            Disabled
+
+        "Selected" ->
+            Selected
+
+        "Hovered" ->
+            Hovered
+
+        _ ->
+            Normal
 
 
 classNameFromState : DayState -> String
@@ -28,44 +49,6 @@ classNameFromState state =
 
         Hovered ->
             "hovered"
-
-
-isSelected : Maybe Date -> Date -> Bool
-isSelected selectedStartDay date =
-    case selectedStartDay of
-        Nothing ->
-            False
-
-        Just selectedDate ->
-            Date.equal selectedDate date
-
-
-isBetween : Maybe Date -> Maybe Date -> Date -> Bool
-isBetween start end needle =
-    case
-        Maybe.map2
-            (\start end ->
-                let
-                    isBeforeStart =
-                        ((needle |> Date.toTime |> Time.inMilliseconds)
-                            > (start |> Date.toTime |> Time.inMilliseconds)
-                        )
-                in
-                    isBeforeStart && Date.isBetween start end needle
-            )
-            start
-            end
-    of
-        Nothing ->
-            False
-
-        Just val ->
-            val
-
-
-isCurrentMonth : Date -> Int -> Bool
-isCurrentMonth date selectedMonthIndex =
-    Date.monthNumber date == selectedMonthIndex + 1
 
 
 getDateState : Date -> Model -> DayState

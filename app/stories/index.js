@@ -36,18 +36,28 @@ storiesOf('Calendar Header', module)
 
 
   storiesOf('Calendar Day', module)
-    .add('october', () => (
+    .add('normal', () => (
       <div id="calendar">
-        <Elm src={Storybook.CalendarDay} flags={'October'} />
+        <Elm src={Storybook.CalendarDay} flags={'Normal'} />
       </div>
     ))
-    .add('december', () => (
+    .add('selected', () => (
       <div id="calendar">
-        <Elm src={Storybook.CalendarDay} flags={'December'} />
+        <Elm src={Storybook.CalendarDay} flags={'Selected'} />
       </div>
     ))
-    .add('january', () => (
+    .add('dimmed', () => (
       <div id="calendar">
-        <Elm src={Storybook.CalendarDay} flags={'january'} />
+        <Elm src={Storybook.CalendarDay} flags={'Dimmed'} />
+      </div>
+    ))
+    .add('hovered', () => (
+      <div id="calendar">
+        <Elm src={Storybook.CalendarDay} flags={'Hovered'} />
+      </div>
+    ))
+    .add('disabled', () => (
+      <div id="calendar">
+        <Elm src={Storybook.CalendarDay} flags={'Disabled'} />
       </div>
     ))
