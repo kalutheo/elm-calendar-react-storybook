@@ -33,6 +33,18 @@ storiesOf('Calendar Header', module)
       <Elm src={Storybook.CalendarHeader} flags={'january'} />
     </div>
   ))
+  .add('Сентябрь', () => (
+    <div id="calendar">
+      <Elm src={Storybook.CalendarHeader} flags={'Сентябрь'} />
+    </div>
+  ))
+  .add('Декабрь', () => (
+    <div id="calendar">
+      <Elm src={Storybook.CalendarHeader} flags={'Декабрь'} />
+    </div>
+  ))
+
+
 
 
   storiesOf('Calendar Day', module)

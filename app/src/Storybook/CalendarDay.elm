@@ -3,7 +3,6 @@ port module Storybook.CalendarDay exposing (..)
 import Calendar.View exposing (calendarDay, calenderHeader, stateFromString)
 import Storybook.Utils exposing (storybookApp)
 import Date
-import Calendar.Model exposing (..)
 import Calendar.Msg
 import Html exposing (table, tr)
 
