@@ -1,4 +1,4 @@
-port module Main exposing (..)
+port module Storybook.CalendarHeader exposing (..)
 
 import Calendar.View exposing (calenderHeader)
 import Storybook.Utils exposing (storybookApp)

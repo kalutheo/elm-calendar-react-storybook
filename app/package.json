@@ -4,7 +4,6 @@
   "description": "This project was bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
   "main": "index.js",
   "dependencies": {
-    "elm-simple-loader": "^1.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },

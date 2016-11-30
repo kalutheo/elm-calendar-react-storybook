@@ -1,4 +1,4 @@
-port module Main exposing (..)
+port module Storybook.CalendarDay exposing (..)
 
 import Calendar.View exposing (calendarDay, calenderHeader, stateFromString)
 import Storybook.Utils exposing (storybookApp)
