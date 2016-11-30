@@ -2,20 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import '../src/main.css';
 import {Storybook} from '../build/calendar.storybook.js';
-
-const Elm = React.createClass({
-  handleRef(ref) {
-    this.ref = ref;
-  },
-  componentDidMount() {
-    if (this.ref) {
-      this.props.src.embed(this.ref, this.props.flags);
-    }
-  },
-	render: function () {
-		return <div ref={this.handleRef}></div>
-	}
-});
+import Elm from './Elm.js';
 
 storiesOf('Calendar Header', module)
   .add('october', () => (
