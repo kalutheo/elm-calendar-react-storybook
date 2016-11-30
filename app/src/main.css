@@ -15,7 +15,6 @@ body{
   font-family:'Open Sans',sans-serif;
   text-align:center;
   color:#555;
-  box-shadow:0 0 50px -14px rgba(0,0,0,.8);
 }
 
 #calendar h1{
@@ -38,7 +37,9 @@ body{
   border-radius:0 0 5px 5px;
 }
 
+#calendar .day,
 #calendar td{
+  vertical-align: middle;
   width:38px;
   height:38px;
   background:#eee;

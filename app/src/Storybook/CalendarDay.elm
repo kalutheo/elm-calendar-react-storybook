@@ -15,13 +15,9 @@ main =
     storybookApp
         { view =
             \model ->
-                let
-                    date =
-                        Date.fromString "2011/3/3" |> Result.withDefault (Date.fromTime 0)
-                in
-                    table []
-                        [ tr []
-                            [ calendarDay date (stateFromString model)
-                            ]
+                table []
+                    [ tr []
+                        [ calendarDay (Date.fromTime 0) (stateFromString model)
                         ]
+                    ]
         }
