@@ -9,7 +9,9 @@ import '../src/main.css';
 
 
 // -- HEADER
+
 const CalendarHeader = CalendarHeaderApp.Storybook.CalendarHeader;
+
 storiesOf('Calendar Header', module)
   .add('october', () => (
     <div id="calendar">
