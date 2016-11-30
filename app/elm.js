@@ -10966,7 +10966,7 @@ var _user$project$Storybook_Utils$storybookApp = function (_p0) {
 		});
 };
 
-var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$storybookApp(
+var _user$project$Main$main = _user$project$Storybook_Utils$storybookApp(
 	{
 		view: function (model) {
 			var date = A2(
@@ -10994,19 +10994,10 @@ var _user$project$Storybook_CalendarDay$main = _user$project$Storybook_Utils$sto
 		}
 	})(_elm_lang$core$Json_Decode$string);
 
-var _user$project$Storybook_CalendarHeader$main = _user$project$Storybook_Utils$storybookApp(
-	{view: _user$project$Calendar_View$calenderHeader})(_elm_lang$core$Json_Decode$string);
-
 var Elm = {};
-Elm['Storybook'] = Elm['Storybook'] || {};
-Elm['Storybook']['CalendarDay'] = Elm['Storybook']['CalendarDay'] || {};
-if (typeof _user$project$Storybook_CalendarDay$main !== 'undefined') {
-    _user$project$Storybook_CalendarDay$main(Elm['Storybook']['CalendarDay'], 'Storybook.CalendarDay', undefined);
-}
-Elm['Storybook'] = Elm['Storybook'] || {};
-Elm['Storybook']['CalendarHeader'] = Elm['Storybook']['CalendarHeader'] || {};
-if (typeof _user$project$Storybook_CalendarHeader$main !== 'undefined') {
-    _user$project$Storybook_CalendarHeader$main(Elm['Storybook']['CalendarHeader'], 'Storybook.CalendarHeader', undefined);
+Elm['Main'] = Elm['Main'] || {};
+if (typeof _user$project$Main$main !== 'undefined') {
+    _user$project$Main$main(Elm['Main'], 'Main', undefined);
 }
 
 if (typeof define === "function" && define['amd'])
