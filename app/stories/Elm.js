@@ -8,7 +8,7 @@ export default class Elm extends React.Component{
       this.props.src.embed(this.ref, this.props.flags);
     }
   }
-	render() {
-		return <div ref={this.handleRef}></div>
-	}
+  render() {
+     return <div ref={this.handleRef}></div>
+  }
 };
