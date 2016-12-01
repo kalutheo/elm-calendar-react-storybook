@@ -23,6 +23,8 @@ React Storybook is an amazing tool that provides the ability to isolate UI Compo
 - We import these Elm Apps into ReactStoryBook thanks to the [elm-webpack-loader](https://github.com/rtfeldman/elm-webpack-loader)
 - These Elm Apps are then wrapped into React thanks to a small wrapper (see : [src/stories/Elm.js](https://github.com/kalutheo/elm-calendar-react-storybook/blob/master/app/stories/Elm.js))
 
+We can now write happy Elm stories :smile:
+
 
 ## How to run the demo ? 
 
@@ -52,8 +54,6 @@ elm-app start
 ```
 npm run storybook
 ```
-
-We can now write happy Elm stories :smile:
 
 * * *
 
