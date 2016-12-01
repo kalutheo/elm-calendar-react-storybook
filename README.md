@@ -11,4 +11,4 @@ ReactStorybook is an amazing tool that provides the ability to isolate UI Compon
 - We import these Elm Apps into ReactStoryBook thanks to the elm-webpack-loader
 - These Elm Apps are then wrapped into React thanks to a small wrapper (cf:  src/stories/Elm.js)
 
-We can now write happy Elm stories :-)
+We can now write happy Elm stories :smile:
