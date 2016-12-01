@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import {Storybook} from '../build/calendar.storybook.js';
 import Elm from './Elm.js';
 import CalendarHeaderApp from '../src/Storybook/CalendarHeader.elm';
 import CalendarDayApp from '../src/Storybook/CalendarDay.elm';
