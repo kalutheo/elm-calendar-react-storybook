@@ -3,6 +3,7 @@ Simple demo showing how ReactStoryBook can be used with an Elm App
 
 
 This demo demonstrates a simple calendar built with Elm and "storybooked" using ReactStoryBook. 
+
 ReactStorybook is an amazing tool that provides the ability to isolate UI Components for testing/documentation purposes. 
 
 ## How can we achieve that ? 
