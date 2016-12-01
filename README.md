@@ -40,7 +40,7 @@ npm install create-elm-app -g
 ```
 cd app
 elm-package install
-npm-install
+npm install
 ```
 
 - Run Elm App : 
