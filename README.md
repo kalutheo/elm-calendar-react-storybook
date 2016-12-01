@@ -24,6 +24,35 @@ React Storybook is an amazing tool that provides the ability to isolate UI Compo
 - These Elm Apps are then wrapped into React thanks to a small wrapper (see : [src/stories/Elm.js](https://github.com/kalutheo/elm-calendar-react-storybook/blob/master/app/stories/Elm.js))
 
 
+## How to run the demo ? 
+
+- In case you don't have ELM :
+```
+npm install elm -g
+```
+
+- Elm-App Package Installation : 
+```
+npm install create-elm-app -g
+```
+
+- Install project dependencies : 
+```
+cd app
+elm-package install
+npm-install
+```
+
+- Run Elm App : 
+```
+elm-app start
+```
+
+- Run Storybook : 
+```
+npm run storybook
+```
+
 We can now write happy Elm stories :smile:
 
 * * *
