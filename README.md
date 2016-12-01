@@ -2,7 +2,7 @@
 
 <table>
 <tr>
-  <td><img src="static/elm-calendar.png" width="600"></td>
+  <td><img src="static/elm-calendar-new.png" width="600"></td>
   <td><img src="static/storybook.gif" width="600"></td>
 </tr>
 </table>
