@@ -1,6 +1,4 @@
 # Storybooking an Elm App
-Simple demo showing how ReactStoryBook can be used with an Elm App
-
 
 This demo demonstrates a simple calendar built with Elm and "storybooked" using ReactStoryBook. 
 
