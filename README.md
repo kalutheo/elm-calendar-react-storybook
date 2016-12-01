@@ -13,7 +13,6 @@ ReactStorybook is an amazing tool that provides the ability to isolate UI Compon
 
 We can now write happy Elm stories :smile:
 
+* * *
 
-*Html and css is forked from http://codepen.io/miroot/pen/aHCIg
-
-Thanks to [@mirot](http://codepen.io/miroot/)*
+*Html and css is forked from http://codepen.io/miroot/pen/aHCIg from [@mirot](http://codepen.io/miroot/)*
