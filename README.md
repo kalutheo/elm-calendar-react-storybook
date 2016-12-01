@@ -1,4 +1,4 @@
-# elm-calendar
+# Storybooking Elm App
 Simple demo showing how ReactStoryBook can be used with an Elm App
 
 
