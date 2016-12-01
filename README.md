@@ -1,11 +1,20 @@
 # Storybooking an Elm App
 
+<table>
+<tr>
+  <td><img src="static/elm-calendar.png" width="600"></td>
+  <td><img src="static/storybook.gif" width="600"></td>
+</tr>
+</table>
+
 This demo demonstrates a simple calendar built with Elm and ["storybooked"](https://ouicar.github.io/2016/08/28/storybook.html) using [ReactStoryBook](https://github.com/storybooks/react-storybook). 
 
 ReactStorybook is an amazing tool that provides the ability to isolate UI Components for testing/documentation purposes. 
 
 - [Elm App Demo](https://kalutheo.github.io/elm-calendar-react-storybook) 
+
 - [StoryBook Demo](https://kalutheo.github.io/elm-calendar-react-storybook/storybook-static) 
+
 
 ## How can we achieve that ? 
 
