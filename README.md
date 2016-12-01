@@ -7,9 +7,9 @@
 </tr>
 </table>
 
-This demo demonstrates a simple calendar built with Elm and ["storybooked"](https://ouicar.github.io/2016/08/28/storybook.html) using [ReactStoryBook](https://github.com/storybooks/react-storybook). 
+This demo demonstrates a simple calendar built with Elm and ["storybooked"](https://ouicar.github.io/2016/08/28/storybook.html) using [React Storybook](https://github.com/storybooks/react-storybook). 
 
-ReactStorybook is an amazing tool that provides the ability to isolate UI Components for testing/documentation purposes. 
+React Storybook is an amazing tool that provides the ability to isolate UI Components for testing/documentation purposes. 
 
 - [Elm App Demo](https://kalutheo.github.io/elm-calendar-react-storybook) 
 
