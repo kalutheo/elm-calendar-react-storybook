@@ -9,8 +9,8 @@ ReactStorybook is an amazing tool that provides the ability to isolate UI Compon
 ## How can we achieve that ? 
 
 - The Calendar is broken down into two small Apps (CalendarHeader, CalendarDay)
-- We use `programWithFlags`so that we can inject data from Javascript to ELM
+- We use `programWithFlags`so that we can inject data from Javascript to Elm
 - We import these Elm Apps into ReactStoryBook thanks to the elm-webpack-loader
-- These ELM Apps are then wrapped into React thantks to a small Wrapper (cf:  src/stories/Elm.js)
+- These Elm Apps are then wrapped into React thanks to a small wrapper (cf:  src/stories/Elm.js)
 
-We can now write happy ELM stories :-)
+We can now write happy Elm stories :-)
